@@ -7,27 +7,21 @@ const LABELS = {
   inconclusive: 'Inconclusive',
 };
 
-export default function AuthenticityPanel({ activeFile, scanResult, onScan, scanning }) {
-  return (
-    <div className="panel">
-      <div className="panel-header">
-        <span>Authenticity</span>
-        {scanResult && <span className="pill">model {scanResult.modelVersion}</span>}
-      </div>
-
-      <div className="panel-body">
-        <button
-          className="btn-primary"
-          style={{ width: '100%' }}
-          onClick={onScan}
-          disabled={!activeFile || scanning}
-        >
-          {scanning ? <><span className="spinner" /> Scanning…</> : 'Check Authenticity →'}
-        </button>
+export default function AuthenticityPanel({ activeFile, scanResult, onScan, scanning, variant = 'panel' }) {
+  const Inner = (
+    <>
+      <button
+        className="btn-primary"
+        style={{ width: '100%', justifyContent: 'center' }}
+        onClick={onScan}
+        disabled={!activeFile || scanning}
+      >
+        {scanning ? <><span className="spinner" /> Scanning…</> : 'Check Authenticity'}
+      </button>
 
         {!scanResult && !scanning && (
           <p className="muted mt-12" style={{ fontSize: 13, lineHeight: 1.5 }}>
-            Run a scan on the open document to score it 0–100 and outline any AI-generated
+            Run a scan on the open document to score it 0 to 100 and outline any AI-generated
             or manipulated images directly on the page.
           </p>
         )}
@@ -70,12 +64,23 @@ export default function AuthenticityPanel({ activeFile, scanResult, onScan, scan
           </>
         )}
 
-        {api.useStubs && (
-          <p className="dim mt-16" style={{ fontSize: 11 }}>
-            Stub mode — using the sample Scan Result from §5.3 of the build plan.
-          </p>
-        )}
+      {api.useStubs && (
+        <p className="dim mt-16" style={{ fontSize: 11 }}>
+          Stub mode. Using the sample Scan Result from §5.3 of the build plan.
+        </p>
+      )}
+    </>
+  );
+
+  if (variant === 'drawer') return Inner;
+
+  return (
+    <div className="panel">
+      <div className="panel-header">
+        <span>Authenticity</span>
+        {scanResult && <span className="pill">model {scanResult.modelVersion}</span>}
       </div>
+      <div className="panel-body">{Inner}</div>
     </div>
   );
 }

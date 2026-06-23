@@ -1,17 +1,17 @@
 # FolioForge
 
-> Authenticity-first PDF workspace. Upload, edit, and detect AI-generated or manipulated content — with a Trust Score and on-page overlay boxes.
+> Authenticity-first PDF workspace. Upload, edit, and detect AI-generated or manipulated content · with a Trust Score and on-page overlay boxes.
 
 This is the team monorepo for the 4–5 day prototype sprint. The build plan is in
-[`docs/BUILD_PLAN.md`](docs/BUILD_PLAN.md) — please skim it before you start, especially **Section 5 (The Contract)**.
+[`docs/BUILD_PLAN.md`](docs/BUILD_PLAN.md) · please skim it before you start, especially **Section 5 (The Contract)**.
 
 ## Repo layout
 
 ```
 folioForge/
-├── frontend/   ← React + Vite + PDF.js   (Sharav)   — port 5173
-├── gateway/    ← Node + Express + SQLite (Siddharth) — port 3000
-└── pyservice/  ← FastAPI (PDF + scan)    (Srestha + Divya) — port 8000
+├── frontend/   ← React + Vite + PDF.js   (Sharav)   · port 5173
+├── gateway/    ← Node + Express + SQLite (Siddharth) · port 3000
+└── pyservice/  ← FastAPI (PDF + scan)    (Srestha + Divya) · port 8000
 ```
 
 Each folder has its own `README.md` with one start command. You should be able to
@@ -67,17 +67,17 @@ ScanResult = {
 ## Running locally
 
 ```bash
-# terminal 1 — frontend (port 5173)
+# terminal 1 · frontend (port 5173)
 cd frontend && npm install && npm run dev
 
-# terminal 2 — gateway (port 3000)         [Siddharth]
+# terminal 2 · gateway (port 3000)         [Siddharth]
 cd gateway   && npm install && npm run dev
 
-# terminal 3 — python service (port 8000)  [Srestha + Divya]
+# terminal 3 · python service (port 8000)  [Srestha + Divya]
 cd pyservice && uv pip install -r requirements.txt && uvicorn app:app --reload
 ```
 
-The frontend can also run standalone in **stub mode** without the gateway —
+The frontend can also run standalone in **stub mode** without the gateway .
 useful for UI work while the backend is in flight. See
 [`frontend/README.md`](frontend/README.md).
 

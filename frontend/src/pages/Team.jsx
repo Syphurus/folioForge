@@ -25,7 +25,7 @@ export default function Team() {
             <Reveal delay={2}>
               <p className="lede">
                 Each lane is owned end to end by one person. Within your lane you have full
-                authority — only the contract is shared and fixed.
+                authority. Only the contract is shared and fixed.
               </p>
             </Reveal>
           </div>
@@ -48,7 +48,7 @@ export default function Team() {
           <Reveal as="div" className="cta">
             <span className="eyebrow" style={{ justifyContent: 'center' }}>Goal · take it forward</span>
             <h2 style={{ marginTop: 14 }}>A demoable prototype<br />for <em className="gold-text">review</em> & improvements.</h2>
-            <p>This is sprint v1.0 — the thin slice. Once it lands, we layer in OCR, batch scan, certificates, and the rest of the SRS.</p>
+            <p>This is sprint v1.0, the thin slice. Once it lands we layer in OCR, batch scan, certificates, and the rest of the SRS.</p>
             <div className="cta-row">
               <Link to="/login" className="btn btn-primary btn-lg">Launch the demo →</Link>
               <a href="https://github.com/Syphurus/folioForge" target="_blank" rel="noreferrer" className="btn btn-lg">Star the repo</a>

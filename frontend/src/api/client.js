@@ -24,7 +24,7 @@ function authHeaders(extra = {}) {
 async function jsonOrThrow(res) {
   if (!res.ok) {
     const body = await res.text().catch(() => '');
-    throw new Error(`${res.status} ${res.statusText}${body ? ` — ${body}` : ''}`);
+    throw new Error(`${res.status} ${res.statusText}${body ? ` · ${body}` : ''}`);
   }
   return res.json();
 }
@@ -44,7 +44,7 @@ async function fakeLatency(ms = 350) {
 }
 
 // Sample Scan Result from Section 5.3 of the contract.
-// Divya provides the real version of this — until then we hard-code it.
+// Divya provides the real version of this · until then we hard-code it.
 const SAMPLE_SCAN_RESULT = {
   trustScore: 38,
   modelVersion: 'v0-stub',

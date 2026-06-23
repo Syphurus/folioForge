@@ -1,11 +1,11 @@
 /* ============================================================
-   FolioForge — Premium design system
+   FolioForge · Premium design system
    Palette: midnight obsidian × champagne gold × electric violet
    Typography: Instrument Serif (display) + Inter (UI) + JetBrains Mono
    ============================================================ */
 
 :root {
-  /* base — obsidian */
+  /* base · obsidian */
   --ink-0: #050507;
   --ink-1: #0a0a10;
   --ink-2: #0f0f17;
@@ -105,10 +105,8 @@ body::before {
 }
 .display em {
   font-style: italic;
-  background: linear-gradient(115deg, var(--gold-2), var(--gold) 40%, var(--violet-2) 90%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--gold);
+  font-weight: 400;
 }
 
 .eyebrow {
@@ -326,14 +324,8 @@ button:disabled { opacity: 0.4; cursor: not-allowed; }
 .spacer { flex: 1; }
 .center { display: grid; place-items: center; }
 
-.gold-text {
-  background: linear-gradient(115deg, var(--gold-2), var(--gold));
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-}
-.violet-text {
-  background: linear-gradient(115deg, var(--violet-2), var(--violet));
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-}
+.gold-text { color: var(--gold); }
+.violet-text { color: var(--violet-2); }
 
 a { color: inherit; }
 a.link { color: var(--gold); text-decoration: none; border-bottom: 1px solid var(--border-gold); padding-bottom: 1px; transition: border-color 0.2s; }

@@ -22,7 +22,7 @@ export default function Landing() {
               <Reveal delay={2}>
                 <p className="lede">
                   FolioForge is the authenticity layer for documents. Upload a PDF,
-                  edit it, and let the engine flag AI-generated or manipulated content —
+                  edit it, and let the engine flag AI-generated or manipulated content
                   with a Trust Score and on-page evidence.
                 </p>
               </Reveal>
@@ -70,7 +70,7 @@ export default function Landing() {
             </Reveal>
             <Reveal delay={2}>
               <p className="lede">
-                A thin end-to-end slice of the full product — enough to feel real,
+                A thin end-to-end slice of the full product. Enough to feel real,
                 small enough to ship in a week. Every piece below is in scope this sprint.
               </p>
             </Reveal>
@@ -85,12 +85,12 @@ export default function Landing() {
             <Reveal delay={2} className="feature">
               <div className="icon">⚝</div>
               <h3>Detect what's fake</h3>
-              <p>The star feature — extract every embedded image, classify each as authentic, synthetic, manipulated, or inconclusive, with confidence.</p>
+              <p>The star feature. Extract every embedded image, classify each as authentic, synthetic, manipulated, or inconclusive, with confidence.</p>
             </Reveal>
             <Reveal delay={3} className="feature">
               <div className="icon">◆</div>
               <h3>Show the evidence</h3>
-              <p>A Trust Score from 0–100 and color-coded boxes drawn directly over suspect regions of the page — hover to see confidence.</p>
+              <p>A Trust Score from 0 to 100 and color-coded boxes drawn directly over suspect regions of the page. Hover to see confidence.</p>
             </Reveal>
           </div>
         </div>
@@ -107,9 +107,9 @@ export default function Landing() {
               </Reveal>
               <Reveal delay={2}>
                 <p className="lede mt-16">
-                  Boxes use normalized coordinates from 0 to 1 — a fraction of the page,
-                  not pixels — so the overlay lines up at any zoom level. Sharav, Siddharth,
-                  Srestha and Divya all build against the exact same Scan Result shape.
+                  Boxes use normalized coordinates from 0 to 1, a fraction of the page
+                  rather than pixels, so the overlay lines up at any zoom level. Sharav,
+                  Siddharth, Srestha and Divya all build against the same Scan Result shape.
                 </p>
               </Reveal>
               <Reveal delay={3} className="mt-24">
@@ -158,7 +158,7 @@ export default function Landing() {
           <Reveal as="div" className="cta">
             <span className="eyebrow" style={{ justifyContent: 'center' }}>Try it now · no setup</span>
             <h2 style={{ marginTop: 14 }}>See the <em className="gold-text">Trust Score</em><br /> on a real document.</h2>
-            <p>Launches in stub mode — the full UI, demo PDF, and sample Scan Result are bundled. No backend required.</p>
+            <p>Launches in stub mode. The full UI, demo PDF, and sample Scan Result are bundled. No backend required.</p>
             <div className="cta-row">
               <Link to="/login" className="btn btn-primary btn-lg">Launch demo →</Link>
               <a href="https://github.com/Syphurus/folioForge" target="_blank" rel="noreferrer" className="btn btn-lg">View on GitHub</a>
@@ -183,7 +183,7 @@ function HeroMockup() {
       </div>
       <div className="mockup-body">
         <div className="mockup-doc">
-          <h4>Quarterly Report — Field Photos</h4>
+          <h4>Quarterly Report, Field Photos</h4>
           <div className="line" />
           <div className="line short" />
           <div className="line mid" />

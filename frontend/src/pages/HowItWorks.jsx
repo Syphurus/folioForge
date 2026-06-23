@@ -28,7 +28,7 @@ export default function HowItWorks() {
               <div className="step">
                 <div className="num">01</div>
                 <h4>Sign in</h4>
-                <p>One-token auth. No multi-tenancy this sprint — single workspace.</p>
+                <p>One-token auth. No multi-tenancy this sprint. Single workspace.</p>
               </div>
               <div className="step">
                 <div className="num">02</div>
@@ -103,9 +103,9 @@ POST `}<span className="k">/api/scan</span>{`      → `}<span className="s">Sca
               <div className="head"><span>Day-by-day master timeline</span></div>
               <pre style={{ fontSize: 12, lineHeight: 1.8 }}>{`Day 1  Scaffold everything · stubs everywhere
 Day 2  Operation buttons + annotation + download
-Day 3  Integration day — swap stubs for real code  ← danger day
+Day 3  Integration day · swap stubs for real code  ← danger day
 Day 4  Polish overlay · loading & error states · authenticity report
-Day 5  Buffer + demo prep — rehearse the §2 flow twice`}</pre>
+Day 5  Buffer + demo prep · rehearse the §2 flow twice`}</pre>
             </div>
           </Reveal>
         </div>
@@ -115,7 +115,7 @@ Day 5  Buffer + demo prep — rehearse the §2 flow twice`}</pre>
         <div className="container">
           <Reveal as="div" className="cta">
             <h2>Ready to <em className="gold-text">try it</em>?</h2>
-            <p>The demo runs in stub mode — full UI, real PDF, real Scan Result. No backend needed.</p>
+            <p>The demo runs in stub mode. Full UI, real PDF, real Scan Result. No backend needed.</p>
             <div className="cta-row">
               <Link to="/login" className="btn btn-primary btn-lg">Launch demo →</Link>
               <Link to="/team" className="btn btn-lg">Meet the team</Link>

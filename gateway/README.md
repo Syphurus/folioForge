@@ -1,4 +1,4 @@
-# FolioForge — Gateway
+# FolioForge · Gateway
 
 Owner: **Siddharth**.
 
@@ -20,11 +20,11 @@ npm run dev          # http://localhost:3000
 - File upload to `gateway/uploads/`; metadata (`fileId`, `filename`, `pageCount`) in SQLite.
 - Simple login → returns a bearer token; verify the token on protected routes.
 - For each operation: look up the file path(s), call the matching FastAPI route (§5.2), save any returned file, return the new `fileId` (or the Scan Result).
-- **Day 1 stubs** — return hard-coded sample responses so Sharav is unblocked before Srestha and Divya are ready.
+- **Day 1 stubs** · return hard-coded sample responses so Sharav is unblocked before Srestha and Divya are ready.
 
 ## Contract checklist
 
-The frontend already calls every one of these — match the shapes exactly.
+The frontend already calls every one of these · match the shapes exactly.
 
 ```
 POST /api/login        → { token }

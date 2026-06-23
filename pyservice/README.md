@@ -1,4 +1,4 @@
-# FolioForge — Python Service
+# FolioForge · Python Service
 
 Owners: **Srestha** (PDF ops) + **Divya** (detection).
 
@@ -34,7 +34,7 @@ Use `pypdf` / `pikepdf`. Read from `path`, write a new file, return `outputPath`
 POST /scan           { path }                   → ScanResult
 ```
 
-**Day 1 first:** return the sample [`ScanResult`](../docs/CONTRACT.md#53-the-scan-result) as a stub. Share that exact JSON with the team — it unblocks Sharav and Siddharth immediately.
+**Day 1 first:** return the sample [`ScanResult`](../docs/CONTRACT.md#53-the-scan-result) as a stub. Share that exact JSON with the team · it unblocks Sharav and Siddharth immediately.
 
 Then:
 1. Extract embedded images with their page positions (e.g. `PyMuPDF` / `fitz`).

@@ -1,7 +1,7 @@
-# FolioForge — Prototype Build Plan
+# FolioForge · Prototype Build Plan
 
 > 4–5 day working-prototype sprint. A thin end-to-end slice that proves the
-> idea — upload, edit, and detect fakes.
+> idea · upload, edit, and detect fakes.
 
 **Team:** Sharav (Frontend) · Siddharth (Backend) · Srestha (PDF) · Divya (Detection)
 **Goal:** a demoable prototype to take forward for review & improvements.
@@ -10,7 +10,7 @@
 
 ## 1. What we are building
 
-A small but complete web app where a user can upload a PDF, perform a few basic operations on it, and — the key part — press **Check Authenticity** to find AI-generated or manipulated content. The result shows a **Trust Score** and draws boxes around suspect parts of the page.
+A small but complete web app where a user can upload a PDF, perform a few basic operations on it, and · the key part · press **Check Authenticity** to find AI-generated or manipulated content. The result shows a **Trust Score** and draws boxes around suspect parts of the page.
 
 We are **not** building the full SRS. We are building one path that works start to finish, so the concept is real and visible. Everything not needed for that path is deliberately left out.
 
@@ -84,7 +84,7 @@ See [CONTRACT.md](CONTRACT.md). Frozen on Day 1.
 The trick that removes all blocking: **everyone builds against fake data first.**
 
 - **Day 1 stubs.** The Gateway returns hard-coded sample responses (from §5) before Python is ready. The Python `/scan` returns a fixed sample Scan Result before the real model is ready.
-- Because of this: the Frontend can build the whole screen — including overlay boxes and Trust Score — on Day 1, using the sample. The Gateway can be wired up without Python. Detection can be perfected separately and swapped in later.
+- Because of this: the Frontend can build the whole screen · including overlay boxes and Trust Score · on Day 1, using the sample. The Gateway can be wired up without Python. Detection can be perfected separately and swapped in later.
 - **The swap.** Around Day 3, real code replaces the stubs one by one. Nothing in the screens changes, because the message shapes never changed.
 
 **Golden rule:** never block on someone else's real code. If they are not ready, use the stub and keep moving.
@@ -99,7 +99,7 @@ The trick that removes all blocking: **everyone builds against fake data first.*
 
 ## 7. Each person's part
 
-### 7.1 Frontend — Sharav
+### 7.1 Frontend · Sharav
 
 **Mission:** build everything the user sees and clicks, and draw the authenticity overlay. The face of the demo.
 
@@ -114,7 +114,7 @@ The trick that removes all blocking: **everyone builds against fake data first.*
 **Depends on:** the contract in §5.1 and the sample Scan Result in §5.3.
 **Provides:** the working UI everyone demos through.
 
-### 7.2 Backend / Gateway — Siddharth
+### 7.2 Backend / Gateway · Siddharth
 
 **Mission:** the single middleman. Catch every request, store files, call Python, return clean results.
 
@@ -125,23 +125,23 @@ The trick that removes all blocking: **everyone builds against fake data first.*
 - For merge/compress/split/scan: look up file path(s), call the matching Python endpoint (§5.2), save any returned file, return the new `fileId` or the Scan Result.
 - Day 1 stubs so the frontend is unblocked before Python exists.
 
-### 7.3 Python · PDF Operations — Srestha
+### 7.3 Python · PDF Operations · Srestha
 
 **Mission:** do the real work on the PDF. Given a file, return a correctly changed file.
 
 **Builds (FastAPI routes in the shared Python app):**
-- `POST /pdf/merge` — combine files (`pypdf` / `pikepdf`).
-- `POST /pdf/compress` — reduce size.
-- `POST /pdf/split` — split by page ranges, return the new file paths.
+- `POST /pdf/merge` · combine files (`pypdf` / `pikepdf`).
+- `POST /pdf/compress` · reduce size.
+- `POST /pdf/split` · split by page ranges, return the new file paths.
 
 Each route reads from a path, writes a new file, returns its `outputPath`.
 
-### 7.4 Python · Detection — Divya
+### 7.4 Python · Detection · Divya
 
 **Mission:** the star feature. Decide what is AI-made or manipulated, return the score and the boxes.
 
 **Builds (FastAPI route in the shared Python app):**
-- **Day 1, first thing:** a `POST /scan` stub that returns the sample Scan Result (§5.3). Share that exact JSON with the team — it unblocks Sharav and Siddharth.
+- **Day 1, first thing:** a `POST /scan` stub that returns the sample Scan Result (§5.3). Share that exact JSON with the team · it unblocks Sharav and Siddharth.
 - Extract embedded images and their page positions (e.g. `PyMuPDF` / `fitz`). Convert each rectangle to a normalized `bbox` by dividing by page width/height → `0–1`.
 - Run the detection model on each image → `classification` + `confidence`.
 - Aggregate into a `0–100` `trustScore`.
@@ -159,7 +159,7 @@ Each route reads from a path, writes a new file, returns its `outputPath`.
 | 4   | Polish overlay, loading/error, login    | Authenticity report + full end-to-end run | Buffer / bug-fix                      | Accuracy check / buffer                                |
 | 5   | Buffer + demo prep                      | Buffer + demo prep                        | Buffer + demo prep                    | Buffer + demo prep                                     |
 
-Day 3 is the danger day — three lanes meet. That is why Days 4–5 are buffer, not new features. If something slips, **drop a feature, never the core flow.**
+Day 3 is the danger day · three lanes meet. That is why Days 4–5 are buffer, not new features. If something slips, **drop a feature, never the core flow.**
 
 ---
 
@@ -181,8 +181,8 @@ Day 3 is the danger day — three lanes meet. That is why Days 4–5 are buffer,
 | Rule                                                              | Why                                                             |
 | ----------------------------------------------------------------- | --------------------------------------------------------------- |
 | The contract (§5) is frozen. Changes are announced first.         | One silent field change breaks two other lanes.                 |
-| Never wait on someone's real code — use their stub.               | Keeps all four working at full speed in parallel.               |
+| Never wait on someone's real code · use their stub.               | Keeps all four working at full speed in parallel.               |
 | Small, frequent merges into `main`; never push broken code.       | Integration stays cheap.                                        |
 | Each person owns their lane fully; ask only at the seams.         | Maximum autonomy, minimum meetings.                             |
 | Two short syncs a day (morning plan, evening status).             | Catch mismatches early.                                         |
-| When time is short, cut a feature — never the core flow.          | A complete small demo beats a broken big one.                   |
+| When time is short, cut a feature · never the core flow.          | A complete small demo beats a broken big one.                   |

@@ -35,7 +35,7 @@ export default function LoginPage({ onLogin }) {
         <div>
           <span className="eyebrow">Welcome to the demo</span>
           <p className="login-quote" style={{ marginTop: 20 }}>
-            “The authenticity layer for trusted documents — <em>forged</em> in five days,
+            “The authenticity layer for trusted documents. <em>Forged</em> in five days,
             built to take forward.”
           </p>
         </div>
@@ -50,7 +50,7 @@ export default function LoginPage({ onLogin }) {
         <div className="login-card">
           <span className="eyebrow">Sign in</span>
           <h1>Open the<br /> workspace.</h1>
-          <p className="sub">No real auth this sprint — any username and password gets you in.</p>
+          <p className="sub">No real auth this sprint. Any username and password gets you in.</p>
 
           <form onSubmit={submit}>
             <label htmlFor="u">Username</label>

@@ -5,7 +5,9 @@ import Landing from './pages/Landing.jsx';
 import HowItWorks from './pages/HowItWorks.jsx';
 import Team from './pages/Team.jsx';
 import LoginPage from './pages/LoginPage.jsx';
-import Workspace from './pages/Workspace.jsx';
+import AppShell from './pages/AppShell.jsx';
+import Library from './pages/Library.jsx';
+import Editor from './pages/Editor.jsx';
 import './styles/global.css';
 import './styles/app.css';
 
@@ -17,6 +19,9 @@ export default function App() {
     setToken(null);
   }
 
+  const requireAuth = (node) =>
+    token ? node : <Navigate to="/login" replace />;
+
   return (
     <BrowserRouter>
       <Routes>
@@ -27,10 +32,13 @@ export default function App() {
           path="/login"
           element={token ? <Navigate to="/app" replace /> : <LoginPage onLogin={setToken} />}
         />
-        <Route
-          path="/app"
-          element={token ? <Workspace onLogout={handleLogout} /> : <Navigate to="/login" replace />}
-        />
+
+        {/* Workspace */}
+        <Route path="/app" element={requireAuth(<AppShell onLogout={handleLogout} />)}>
+          <Route index element={<Library />} />
+          <Route path="doc/:fileId" element={<Editor />} />
+        </Route>
+
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
