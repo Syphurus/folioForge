@@ -2,8 +2,11 @@
 
 > Authenticity-first PDF workspace. Upload, edit, and detect AI-generated or manipulated content · with a Trust Score and on-page overlay boxes.
 
-This is the team monorepo for the 4–5 day prototype sprint. The build plan is in
-[`docs/BUILD_PLAN.md`](docs/BUILD_PLAN.md) · please skim it before you start, especially **Section 5 (The Contract)**.
+This is the team monorepo for the 4 to 5 day prototype sprint.
+
+**New to the repo?** Read [ONBOARDING.md](ONBOARDING.md) first. It walks you through clone, setup, and your specific lane in about 10 minutes.
+
+The full build plan lives in [`docs/BUILD_PLAN.md`](docs/BUILD_PLAN.md). The frozen API contract that every lane builds against lives in [`docs/CONTRACT.md`](docs/CONTRACT.md). Skim both before writing code.
 
 ## Repo layout
 
