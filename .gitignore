@@ -1,0 +1,39 @@
+# Node
+node_modules/
+.npm/
+.yarn/
+.pnp.*
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# Vite
+.vite/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Data / runtime
+gateway/uploads/
+gateway/data/
+*.sqlite
+*.sqlite3
+*.db
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.log
