@@ -12,7 +12,7 @@ export default function AuthenticityPanel({ activeFile, scanResult, onScan, scan
     <div className="panel">
       <div className="panel-header">
         <span>Authenticity</span>
-        {scanResult && <span className="badge">model {scanResult.modelVersion}</span>}
+        {scanResult && <span className="pill">model {scanResult.modelVersion}</span>}
       </div>
 
       <div className="panel-body">
@@ -22,7 +22,7 @@ export default function AuthenticityPanel({ activeFile, scanResult, onScan, scan
           onClick={onScan}
           disabled={!activeFile || scanning}
         >
-          {scanning ? <><span className="spinner" /> &nbsp;Scanning…</> : 'Check Authenticity'}
+          {scanning ? <><span className="spinner" /> Scanning…</> : 'Check Authenticity →'}
         </button>
 
         {!scanResult && !scanning && (
@@ -35,9 +35,7 @@ export default function AuthenticityPanel({ activeFile, scanResult, onScan, scan
         {scanResult && (
           <>
             <div className="trust-card mt-16">
-              <div className="muted" style={{ fontSize: 12, letterSpacing: '.04em', textTransform: 'uppercase' }}>
-                Trust score
-              </div>
+              <div className="label">Trust score</div>
               <div className="trust-score">
                 <ScoreNumber value={scanResult.trustScore} />
                 <span className="unit">/ 100</span>

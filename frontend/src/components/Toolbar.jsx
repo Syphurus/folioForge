@@ -12,7 +12,7 @@ export default function Toolbar({
   return (
     <div className="toolbar">
       <button onClick={onMerge} disabled={selectedCount < 2 || busy} title="Merge selected files (pick 2+)">
-        ⊕ Merge <span className="pill">{selectedCount} selected</span>
+        ⊕ Merge {selectedCount > 0 && <span className="info">· {selectedCount}</span>}
       </button>
       <button onClick={onCompress} disabled={!activeFile || busy} title="Compress the open file">
         ⇊ Compress
@@ -26,10 +26,10 @@ export default function Toolbar({
       <button
         onClick={onToggleHighlight}
         disabled={!activeFile}
-        style={highlightMode ? { background: 'rgba(124,92,255,0.18)', borderColor: 'rgba(124,92,255,0.5)' } : undefined}
+        style={highlightMode ? { background: 'rgba(201,169,97,0.15)', borderColor: 'var(--gold)', color: 'var(--gold-2)' } : undefined}
         title="Click-drag on the page to draw a highlight"
       >
-        ✎ Highlight {highlightMode && <span className="pill">on</span>}
+        ✎ Highlight {highlightMode && <span className="info">· on</span>}
       </button>
 
       <div className="spacer" />
