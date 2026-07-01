@@ -1,51 +1,58 @@
-from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
+import os
+import tempfile
+
+from fastapi import APIRouter, File, HTTPException, UploadFile
+
+from utils.detector import calculate_trust_score, classify_image
 from utils.extractor import extract_images_with_positions
-from utils.detector import classify_image, calculate_trust_score
 
 router = APIRouter()
 
-class ScanRequest(BaseModel):
-    path: str
 
 @router.post("/scan")
-def scan_document(req: ScanRequest):
+async def scan_document(file: UploadFile = File(...)):
+    if not file.filename or not file.filename.lower().endswith(".pdf"):
+        raise HTTPException(status_code=400, detail="Only PDF files are accepted")
+
+    # Persist the uploaded PDF to a temp file so PyMuPDF can open it by path.
+    tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".pdf")
     try:
-        # Step 1 - Extract all images from the PDF
-        images = extract_images_with_positions(req.path)
+        tmp.write(await file.read())
+        tmp.close()
+
+        images = extract_images_with_positions(tmp.name)
+
+        # Skip decorative images (icons, dividers, tiny logos). The classifier
+        # gives noise on small non-photographic content, and it drags the trust
+        # score down for no reason. 1% of page area ≈ ~40x40 on Letter.
+        MIN_AREA = 0.01
+        images = [i for i in images if i["bbox"][2] * i["bbox"][3] >= MIN_AREA]
 
         if not images:
-            # No images found - document is text only
-            return {
-                "trustScore":    100,
-                "modelVersion":  "v1",
-                "elements":      []
-            }
+            return {"trustScore": 100, "modelVersion": "v1", "elements": []}
 
-        # Step 2 - Run detection model on each image
         elements = []
         for img in images:
             result = classify_image(img["image_bytes"])
-
             elements.append({
                 "type":           "image",
                 "page":           img["page"],
                 "bbox":           img["bbox"],
                 "classification": result["classification"],
-                "confidence":     result["confidence"]
+                "confidence":     result["confidence"],
             })
 
-        # Step 3 - Calculate overall trust score
-        trust_score = calculate_trust_score(elements)
-
-        # Step 4 - Return real result in exact same shape as stub
         return {
-            "trustScore":   trust_score,
+            "trustScore":   calculate_trust_score(elements),
             "modelVersion": "v1",
-            "elements":     elements
+            "elements":     elements,
         }
-
-    except FileNotFoundError:
-        raise HTTPException(status_code=404, detail="PDF file not found")
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        try:
+            os.unlink(tmp.name)
+        except OSError:
+            pass
