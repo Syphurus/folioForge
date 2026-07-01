@@ -6,3 +6,4 @@ pillow
 transformers
 torch
 requests
+pypdf
