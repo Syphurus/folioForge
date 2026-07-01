@@ -64,7 +64,7 @@ export default function AuthenticityPanel({ activeFile, scanResult, onScan, scan
           </>
         )}
 
-      {api.useStubs && (
+      {import.meta.env.VITE_SCAN_URL === 'stub' && (
         <p className="dim mt-16" style={{ fontSize: 11 }}>
           Stub mode. Using the sample Scan Result from §5.3 of the build plan.
         </p>

@@ -2,8 +2,10 @@
 // Talks to the Gateway (Section 5.1 of the build plan).
 // When VITE_USE_STUBS=true (default), all calls return mock data so the
 // frontend runs end-to-end without the Gateway/Python services being up.
+import { pdfjsLib } from '../pdf/pdfjs.js';
 
 const GATEWAY_URL = import.meta.env.VITE_GATEWAY_URL || 'http://localhost:3000';
+const SCAN_URL = import.meta.env.VITE_SCAN_URL || 'http://localhost:8000';
 const USE_STUBS = (import.meta.env.VITE_USE_STUBS ?? 'true') !== 'false';
 
 const TOKEN_KEY = 'folioforge.token';
@@ -104,12 +106,21 @@ export const api = {
   async upload(files) {
     if (USE_STUBS) {
       await fakeLatency(600);
-      const created = Array.from(files).map((f) => {
+      const created = [];
+      for (const f of Array.from(files)) {
+        let pageCount = 0;
+        try {
+          const buf = await f.arrayBuffer();
+          const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+          pageCount = pdf.numPages;
+        } catch {
+          pageCount = 0; // unreadable — leave 0 so the UI can show "?"
+        }
         const fileId = `demo-${stubStore.nextId++}`;
-        const entry = { fileId, filename: f.name, pageCount: 3, _blob: f };
+        const entry = { fileId, filename: f.name, pageCount, _blob: f };
         stubStore.files.push(entry);
-        return entry;
-      });
+        created.push(entry);
+      }
       return created[0]; // contract: { fileId, filename, pageCount }
     }
     const form = new FormData();
@@ -199,16 +210,22 @@ export const api = {
   },
 
   async scan(fileId) {
-    if (USE_STUBS) {
+    // Scan always calls the real Python service (Divya's work). Only fall back
+    // to the sample result if the scan URL is explicitly disabled.
+    if (import.meta.env.VITE_SCAN_URL === 'stub') {
       await fakeLatency(1200);
       return SAMPLE_SCAN_RESULT;
     }
+    const pdfUrl = await this.getPdfUrl(fileId);
+    const pdfRes = await fetch(pdfUrl);
+    if (!pdfRes.ok) throw new Error(`Could not load PDF (${pdfRes.status})`);
+    const pdfBlob = await pdfRes.blob();
+
+    const form = new FormData();
+    form.append('file', pdfBlob, `${fileId}.pdf`);
+
     return jsonOrThrow(
-      await fetch(`${GATEWAY_URL}/api/scan`, {
-        method: 'POST',
-        headers: authHeaders({ 'Content-Type': 'application/json' }),
-        body: JSON.stringify({ fileId }),
-      })
+      await fetch(`${SCAN_URL}/scan`, { method: 'POST', body: form })
     );
   },
 };

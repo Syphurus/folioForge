@@ -111,6 +111,8 @@ export default function AppShell({ onLogout }) {
           activeFileId,
           scanByFile,
           setScanByFile,
+          updatePageCount: (fileId, pageCount) =>
+            setFiles((prev) => prev.map((f) => (f.fileId === fileId ? { ...f, pageCount } : f))),
         }} />
       </main>
 
